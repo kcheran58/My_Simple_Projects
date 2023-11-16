@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script type="text/javascript" src="calcu.js"></script>
+</head>
+<link rel="stylesheet" href="calculator.css"><body>
+    <body>
+        <div class="calculator">
+            <div id="a">
+            <div id="b" class="display">
+            <p id="ans"></p>
+            </div>
+            <button id ="b" onclick="deleteLastCharacter()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB9CAMAAAC4XpwXAAAAY1BMVEX///8AAABhYWGJiYne3t56enrX19elpaVRUVE/Pz/4+PhVVVXw8PD19fVNTU37+/uWlpbOzs7IyMg6OjpmZmYSEhLl5eW6urqtra2CgoIdHR00NDRtbW2Pj49cXFyenp4qKip0GeFbAAAED0lEQVRoge2aaXuqMBCFBbVuYF2pW1v//69s6zIzhNmC8NwPN+dTH9PwGjgkZxIHg6SkpKSkpKSkpP9HxeE47FiTkRe+OWU96NsHX+/7gGfZxgMf9cPOsqUDXvVy2/+0L/4hPMtM41Xb/uAmvQD4Ke9OUyf9DN/zzXxGfo189CXAXW+HV28u+qIfuI9+AfhHp3AXHeGHoKUcziN5k3UkfQzwSdDyfnFNUxSenahrbfonwD/Dpvz3w2kc/FdVBH0lw+8vwvI9Dk7fWYv+LcLL/NGw8D77yXO+gmdv0CcAP4ZNB2ha+EaP19r56Ei4NBvxmbish/ApLGkqfYMduOah3izBtyV8qNER/sVfkYzeuvkIn5FPFTqBl83Wm9CThvUQvqTXkukY4hZy9CB4bfQIr19LpI8AvtVyj8t6ZOT1a0n0AjoYocthPfLMg0co0CsY+clKfKb1iNvDJp6OIe5ahT0aMqxHbnujmaUXEGX2nhyFo2esJxlOpJeYo3whTrEeN8Pp9FkkXLEeO8Op9DYJUrAeP8Np9B30iAlxrPWEGU6hY44KQ5wb/xy9ajiW3hbOWE+c4UT6EXo4S3qiwHryDCfRlQTpUM16ygwn0PHZDVvAaf+cvOfK2kvpSoiLxoOU5blGxzQxbgmnN/85cnWRInQokvPWcGq9+zMXDRfQn3/FFkeBaqPnZziOvnH2sESevVlnIH39+Ov0Yok+IXQr6SK9gDjz0t4IgdsPkbgOlxf3zqkBN8sMQi/B9PvW+ABulRl0tqmuzz7nlvgG3HBebabFJHu2w6QK/1KzHk8n+8DX2A2ZQZDhXGVGsMLClJOdX4DfZjhPhRumizX0mUWOvpHhHBVuI1nhWuPckmjAIcPZFW4zVX5Anx3fxYCTJdWscJlEjXhmu8SE1zKcZT2umsCv7E0ZYoYzrMfWcbF4JcPp1uNrWGWLUIVPm2GCTDtN6wn1O4bbVQSczXCa9aS9C3lrWIYLGU6xnrhvk0MfvZwzqtQ/ydaT96x8RwJWlXqTaD2Z/u7Bm1XqXdKsp+wWlnjzpahnV6kPCQuutlNq7qA4qtQmnlpP3SWe4+EnlzY8VSqItZ6+Q45Rj/kHV5WK4qxnnA5UgL+G/4GLETPD6XjY8rZORkaQNLfBzS+eR4SG4VDgfDCxeSqEUW8WUOb3nTW9Sq3pMXo8krNPxBAfRr0bfhsTwG7WI++P4zQQk+YsWCbmi9iac1V/eT0noeSQIhhocfQZDvVdm7hcp8Dtop5DvhPwNlGvO7p+MNc7naxS7beUmnL+8oHOVPm4M128dBL1upejYD/aV+mRTrJWx3L80mlAk2a3cq3Q9MSmUzkPQUa9/NjKvRtfHHYd/szqpvHaxiYlJSUlJSUlJSU59AMWzy/wwuz/eQAAAABJRU5ErkJggg==" width="120px",height="100px">
+          </div>
+           <!--<img src="data:image/png;base64,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">
+           -->  <div class="buttons">
+                <button class="button" onclick="appendtoStr('1')">1</button>
+                <button class="button" onclick="appendtoStr('2')">2</button>
+                <button class="button" onclick="appendtoStr('3')">3</button>
+                <button class="button" onclick="appendtoStr('+')">+</button>
+                <button class="button" onclick="appendtoStr('4')">4</button>
+                <button class="button" onclick="appendtoStr('5')">5</button>
+                <button class="button" onclick="appendtoStr('6')">6</button>
+                <button class="button" onclick="appendtoStr('-')">-</button>
+                <button class="button" onclick="appendtoStr('7')">7</button>
+                <button class="button" onclick="appendtoStr('8')">8</button>
+                <button class="button" onclick="appendtoStr('9')">9</button>
+                <button class="button" onclick="appendtoStr('/')">/</button>
+                <button class="button" onclick="clearDisplay()">C</button>
+                <button class="button" onclick="appendtoStr('0')">0</button>
+                <button class="button" onclick="appendtoStr('*')">*</button>
+                <button class="button" onclick="calculate()">=</button>
+        
+            </div>
+            
+        </div>
+    </body>
+</html>
